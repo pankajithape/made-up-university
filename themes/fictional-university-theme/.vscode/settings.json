@@ -1,0 +1,11 @@
+{
+  "editor.fontFamily": "'cascadia-code', Consolas, 'Courier New', monospace",
+  "editor.formatOnSave": true,
+
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+},
+"files.autoSave": "afterDelay",
+"git.ignoreLimitWarning": true
+}
