@@ -1,4 +1,18 @@
 <?php
+
+require get_theme_file_path('inc/search-route.php');
+
+
+function university_custom_rest()
+{
+  register_rest_field('post', 'authorName', array(
+    'get_callback' => function () {
+      return get_the_author();
+    }
+  ));
+}
+add_action('rest_api_init', 'university_custom_rest');
+
 function pageBanner($args = NULL)
 {
   // php logic lives here
@@ -33,6 +47,7 @@ function pageBanner($args = NULL)
   </div>
 </div>
 <?php }
+
 function university_files()
 {
   wp_enqueue_script('university_main_scripts', get_theme_file_uri('/build/index.js'), array('jquery'), '1.0', true);
@@ -42,8 +57,13 @@ function university_files()
   wp_enqueue_style('font1', '//fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i|Roboto:100,300,400,400i,700,700i');
   wp_enqueue_style('university_main_styles', get_theme_file_uri('/build/style-index.css'));
   wp_enqueue_style('university_extra_files', get_theme_file_uri('/build/index.css'));
+
+  wp_localize_script('university_main_scripts', 'universityData', array(
+    'root_url' => get_site_url()
+  ));
 }
 add_action('wp_enqueue_scripts', 'university_files');
+
 function university_features()
 {
   register_nav_menu('headerMenuLocation', 'Header Menu Location ');
@@ -61,6 +81,7 @@ function university_features()
   // add_image_size('professorProtrait3', 1686, 650, false);
 }
 add_action('after_setup_theme', 'university_features');
+
 function university_adjust_queries($query)
 {
   if (!is_admin() and is_post_type_archive('program') and $query->is_main_query()) {
