@@ -6,6 +6,8 @@ function university_post_types()
 
     // event post type
     register_post_type('event', array(
+        'capability_type' => 'event',
+        'map_meta_cap' => true,
         'supports' => array('title', 'editor', 'excerpt'),
         'rewrite' => array('slug' => 'events'),
         'has_archive' => true,
@@ -24,6 +26,8 @@ function university_post_types()
 
     // program post type
     register_post_type('program', array(
+        'capability_type' => 'program',
+        'map_meta_cap' => true,
         'supports' => array('title'),
         'rewrite' => array('slug' => 'programs'),
         'has_archive' => true,
