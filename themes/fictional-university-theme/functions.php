@@ -1,6 +1,7 @@
 <?php
 
 require get_theme_file_path('inc/search-route.php');
+require get_theme_file_path('inc/like-route.php');
 
 
 function university_custom_rest()
@@ -38,7 +39,7 @@ function pageBanner($args = NULL)
     if (get_field('page_banner_background_image') and !is_archive() and !is_home()) {
       $args['photo'] = get_field('page_banner_background_image')['sizes']['pageBanner'];
     } else {
-      $args['photo'] = get_theme_file_uri('/images/ocean.jpg');
+      $args['photo'] = get_theme_file_uri('/css/images/ocean.jpg');
     }
   }
 ?>
@@ -190,4 +191,12 @@ function makeNotePrivate($data, $postarr)
     $data['post_status'] = "private";
   }
   return $data;
+}
+
+
+add_filter('ai1wm_exclude_content_from_export', 'ignoreCertainFiles');
+function ignoreCertainFiles()
+{
+  $exclude_filters[] = "themes/fictional-university-theme/node_modules";
+  return $exclude_filters;
 }
